@@ -33,10 +33,13 @@ Abra o diretório de instalação do PHP, encontre o arquivo *php.ini-production
 
 Encontre as seguintes linhas e descomente-as, são essas:
 
--pdo_mysql; 926
+-pdo_mysql;
+
 -curl; 
--mb_string
--openssl
+
+-mb_string;
+
+-openssl;
 
 #### Instalar as dependências.
 
@@ -71,14 +74,6 @@ Se o resultado for a lista de tabelas existentes, fique feliz, você conseguiu!
 
 #### Configure as credenciais de acesso.
 Encontre o arquivo **/config/database.php** e edite-o conforme as credenciais do seu usuário do banco de dados.
-
-### Crie o primeiro usuário de acesso.
-Dentro do diretório da aplicação, execute no terminal o comando 
-`php config/create-admin.php`;
-Isso criará um usuário com as credenciais: 
-|Nome|Email|Senha|
-| -  |  -  |  -  |
-|  Administrador | admin@admin.com | 123456|
 
 ### Executando a aplicação.
 Para executar e testar a aplicação, dentro do terminal, execute:
