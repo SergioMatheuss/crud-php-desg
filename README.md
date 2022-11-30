@@ -1,7 +1,87 @@
-#Bom dia
+# CRUD DE ESCOLAS
 
-Primeiramente você irá baixar o php na sua máquina, seu maquinado, depois você irá baixar um troço chamado composer, depois outro troço chamado mysql e um software editor de código fonte, normalmente é usado o vscode. Após isso você irá abrí-lo, ir no terminal, digitar composer dump, e depois composer install e por último php -S localhost:8000 -t public. Então você poderá apreciar o melhor crud para todos os interesses existentes na face da terra.  
+Aplicação Web do tipo monolítica criada com:
+-PHP para o backEnd 7^4;
+-MYSQL/MariaDB para o banco de dados;
+-HTML, CSS e JavaScript pro FRONT-END; 
 
-#ENGLISH VERSION
+##Funcionalidades:
 
-First you will download php on your machine, your machine, then you will download a section called composer, then another section called mysql and a source code editor software, normally vscode is used. After that you will open it, go to the terminal, type composer dump, and then composer install and finally: php -S localhost:8000 -t public. So you can enjoy the best crud for every interest on earth.
+-CRUD de Alunos;
+-CRUD de Professores;
+-CRUD de Usuários;
+-CRUD de Categorias;
+-CRUD de Cursos.
+
+## Passo a passo para rodar o projeto.
+Certifique-se que seu computador tem os softwares instalados;
+-PHP;
+-MySQL ou MariaDB;
+-Editor de texto(por exemplo o VS code);
+-Navegador Web;
+-Composer (Gerenciador de pacotes do PHP);
+
+
+### Clone o projeto.
+Baixe ou faça o clone do repositorio:
+`git clone https://github.com/SergioMatheuss/crud-php-desg`,
+após isso entre no diretório que foi gerado
+`cd crud-php-desg`
+
+#### Habilitar as extensões do PHP.
+Abra o diretório de instalação do PHP, encontre o arquivo *php.ini-production*, renomeio-o para *php.ini* e abra-o com algum editor de texto.
+
+Encontre as seguintes linhas e descomente-as, são essas:
+
+-pdo_mysql; 926
+-curl; 
+-mb_string
+-openssl
+
+#### Instalar as dependências.
+
+Dentro do diretório da aplicação execute no terminal:
+`composer install`
+
+Certifique-se que um diretório chamado **/vendor** foi criado.
+
+### Banco de Dados.
+
+> O banco de dados é relacional e contém as tabelas com até 2 níveis de normatização. 
+
+#### Criando o banco de dados.
+
+Entre no seu cliente de banco de dados, e execute o comando:
+
+```sql CREATE DATABASE db_escola;
+```
+
+#### Migrar a estrutura do banco de dados.
+
+Ainda dentro do diretório da aplicação, copie e cole o conteúdo do arquivo **db.sql** e execute.
+
+Certifique-se que as tabelas foram criadas, executando o comando
+
+```sql 
+SHOW TABLES;
+```
+
+Se o resultado for a lista de tabelas existentes, fique feliz, você conseguiu!
+
+#### Configure as credenciais de acesso.
+Encontre o arquivo **/config/database.php** e edite-o conforme as credenciais do seu usuário do banco de dados.
+
+### Crie o primeiro usuário de acesso.
+Dentro do diretório da aplicação, execute no terminal o comando 
+`php config/create-admin.php`;
+Isso criará um usuário com as credenciais: 
+|Nome|Email|Senha|
+| -  |  -  |  -  |
+|  Administrador | admin@admin.com | 123456|
+
+### Executando a aplicação.
+Para executar e testar a aplicação, dentro do terminal, execute:
+
+`php -S localhost:8000 -t public`
+
+Agora acesse o endereço `http://localhost:8000` em seu navegador.
