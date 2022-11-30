@@ -36,7 +36,7 @@ class UserController extends AbstractController
         $password = password_hash($_POST['password'], PASSWORD_ARGON2I);
 
         $user = new User();
-        $user->name = $_POST['name'];
+        $user->nome = $_POST['nome'];
         $user->email = $_POST['email'];
         $user->password = $password;
         $user->profile = $_POST['profile'];

@@ -6,8 +6,8 @@ namespace App\Controller;
 
 use App\Model\Aluno;
 use App\Repository\AlunoRepository;
-use App\Security\UserSecurity;
 use Dompdf\Dompdf;
+
 use Exception;
 
 class AlunoController extends AbstractController
@@ -140,13 +140,13 @@ class AlunoController extends AbstractController
         ";
 
         $dompdf = new Dompdf();
-        $dompdf->setPaper('A4', 'portrait'); // tamanho da pagina
+        $dompdf->setPaper('A4', 'portrait');
 
-        $dompdf->loadHtml($design); //carrega o conteudo do PDF
+        $dompdf->loadHtml($design);
 
-        $dompdf->render(); //aqui renderiza 
+        $dompdf->render();
         $dompdf->stream('relatorio-alunos.pdf', [
             'Attachment' => 0,
-        ]); //é aqui que a magica acontece
+        ]);
     }
 }

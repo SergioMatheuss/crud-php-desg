@@ -27,5 +27,5 @@ abstract class UserSecurity
     public static function getUser(): User
     {
         return $_SESSION['user_escola'];
-    } 
+    }
 }

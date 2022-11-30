@@ -47,19 +47,19 @@ class CursoController extends AbstractController
         $curso->categoria_id = intval($_POST['categoria']);
 
         $this->repository->inserir($curso);
-        // try {
-        // } catch (Exception $exception) {
-        //     var_dump($exception->getMessage());
-        //     // if (true === str_contains($exception->getMessage(), 'cpf')) {
-        //     //     die('CPF ja existe');
-        //     // }
+        try {
+        } catch (Exception $exception) {
+            var_dump($exception->getMessage());
+            // if (true === str_contains($exception->getMessage(), 'cpf')) {
+            //     die('CPF ja existe');
+            // }
 
-        //     // if (true === str_contains($exception->getMessage(), 'email')) {
-        //     //     die('Email ja existe');
-        //     // }
+            // if (true === str_contains($exception->getMessage(), 'email')) {
+            //     die('Email ja existe');
+            // }
 
-        //     die('Vish, aconteceu um erro');
-        // }
+            die('Vish, aconteceu um erro');
+        }
 
         $this->redirect('/cursos/listar');
     }

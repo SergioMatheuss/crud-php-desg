@@ -17,7 +17,7 @@ class ProfessorRepository implements RepositoryInterface
     {
         $conexao = DatabaseConnection::abrirConexao();
 
-        $sql = "SELECT * FROM ".self::TABLE;
+        $sql = "SELECT * FROM " . self::TABLE;
 
         $query = $conexao->query($sql);
 

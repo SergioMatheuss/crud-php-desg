@@ -18,7 +18,7 @@ class UserRepository
         $this->pdo = DatabaseConnection::abrirConexao();
     }
 
-    //encontre um usuario por email
+    
     public function findOneByEmail(string $email): User|bool
     {
         $sql = "SELECT * FROM ".self::TABLE." WHERE email='{$email}'";
@@ -42,8 +42,8 @@ class UserRepository
 
     public function insert(User $user): User
     {
-        $sql = "INSERT INTO ".self::TABLE."(name, email, password, profile)";
-        $sql .= " VALUES ('{$user->name}', '{$user->email}', '{$user->password}', '{$user->profile}')";
+        $sql = "INSERT INTO ".self::TABLE."(nome, email, password, profile)";
+        $sql .= " VALUES ('{$user->nome}', '{$user->email}', '{$user->password}', '{$user->profile}')";
 
         $this->pdo->query($sql);
 

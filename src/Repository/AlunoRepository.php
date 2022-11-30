@@ -23,20 +23,23 @@ class AlunoRepository implements RepositoryInterface
     {
         $sql = 'SELECT * FROM ' . self::TABLE;
 
-        //preparando para executar no banco
+        
         $query = $this->pdo->query($sql);
 
-        //executando o comando lá no banco de dados
+        
         $query->execute(); 
 
-        return $query->fetchAll(PDO::FETCH_CLASS, Aluno::class); //pegando os dados e tranformando em array
+        return $query->fetchAll(PDO::FETCH_CLASS, Aluno::class);
     }
 
     public function buscarUm(string $id): object
     {
         $sql = "SELECT * FROM ".self::TABLE." WHERE id = '{$id}'";
+
         $query = $this->pdo->query($sql);
+
         $query->execute();
+        
         return $query->fetchObject(Aluno::class); 
     }
 
@@ -70,7 +73,7 @@ class AlunoRepository implements RepositoryInterface
                 cpf='{$novosDados->cpf}',
                 dataNascimento='{$novosDados->dataNascimento}',
                 genero='{$novosDados->genero}' 
-            WHERE id = '{$id}';";
+                WHERE id = '{$id}';";
 
         $this->pdo->query($sql);
 
