@@ -53,7 +53,8 @@ Certifique-se que um diretório chamado **/vendor** foi criado.
 
 Entre no seu cliente de banco de dados, e execute o comando:
 
-```sql CREATE DATABASE db_escola;
+```sql 
+CREATE DATABASE db_escola;
 ```
 
 #### Migrar a estrutura do banco de dados.
