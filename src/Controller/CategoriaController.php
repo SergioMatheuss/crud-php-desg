@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Model\Categoria;
 use App\Repository\CategoriaRepository;
+use Dompdf\Dompdf;
 
 
 class CategoriaController extends AbstractController
@@ -40,19 +41,18 @@ class CategoriaController extends AbstractController
         }
 
         $categoria = new Categoria();
-        $categoria->id = $_POST['id'];
         $categoria->nome = $_POST['nome'];
-        // $categoria->descricao = $_POST['descricao'];
-        // $categoria->cargaHoraria = intval($_POST['cargaHoraria']);
-        // $categoria->categoria_id = intval($_POST['categoria']);
-
         $this->repository->inserir($categoria);
        $this->redirect('/categorias/listar');
     }
 
     public function excluir(): void
     {
-        echo "Pagina de excluir";
+        $id = $_GET['id'];
+
+        $this->repository->excluir($id);
+        
+        $this->redirect('/categorias/listar');
     }
 
     public function editar(): void
@@ -68,11 +68,50 @@ class CategoriaController extends AbstractController
         if (false === empty($_POST)) {
             $categoria = new Categoria();
             $categoria->nome = $_POST['nome'];
-            // $categoria->descricao = $_POST['descricao'];
-            // $categoria->cargaHoraria = intval($_POST['cargaHoraria']);
-            // $categoria->categoria_id = intval($_POST['categoria']);
             $this->repository->atualizar($categoria, $id);
             $this->redirect('/categorias/listar');
         }
+    }
+    private function renderizar(iterable $categorias)
+    {
+        $resultado = '';
+        foreach ($categorias as $categoria){
+            $resultado .= "
+            <tr>
+            <td>{$categoria->id}</td>
+            <td>{$categoria->nome}</td>
+            </tr>
+            ";
+        }
+        return $resultado;
+    }
+    public function relatorio(): void
+    {
+        $hoje = date('d/m/Y');
+
+        $categorias = $this->repository->buscarTodos();
+        
+        $design =  "
+            <h1>Relatorio de Alunos</h1>
+            <hr>
+            <em>Gerado em {$hoje}</em>
+            <br>
+            <table border='1' width='100%' style='margin-top: 30px;'>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                ".$this->renderizar($categorias)."
+                </tbody>
+            </table>
+        ";
+        $dompdf = new Dompdf();
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->loadHtml($design);
+        $dompdf->render();
+        $dompdf->stream('relatorio-categorias.pdf', ['Attachment' => 0,]);
     }
 }
